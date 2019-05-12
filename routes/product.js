@@ -24,6 +24,17 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/:slug', (req, res) => {
+  const { slug } = req.params;
+
+  Product.findOne({slug}, (err, data) => {
+    if (err) {
+      res.send(500)
+    }
+    res.send(data)
+  })
+})
+
 router.post('/:id', upload.any(), (req, res) => {
   const { name, variants } = req.body
   const { id } = req.params
